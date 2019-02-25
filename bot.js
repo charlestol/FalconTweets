@@ -14,5 +14,5 @@ var Twitter = new twit({
 })
 
 Twitter.post('statuses/update', { status: 'Falcon ' + randomWords() }, function(err, data, response) {
-    console.log(data)
+    console.log(data.text)
   });

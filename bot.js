@@ -1,10 +1,10 @@
-var twit = require("twit");
-var randomWords = require('random-english-words');
+let twit = require("twit");
+let randomWords = require('random-english-words');
 const {
   ck, cs, at, ats
 } = require('./secrets');
 
-var Twitter = new twit({
+let Twitter = new twit({
     consumer_key: ck,
     consumer_secret: cs,
     access_token: at,
@@ -13,6 +13,14 @@ var Twitter = new twit({
     strictSSL: true, // optional - requires SSL certificates to be valid.
 })
 
-Twitter.post('statuses/update', { status: 'Falcon ' + randomWords() }, function(err, data, response) {
+let tweeter = () => Twitter.post('statuses/update', { status: 'Falcon ' + randomWords() }, function(err, data, response) {
     console.log(data.text)
-  });
+});
+
+// every 15sec for testing
+// const interval = 15 * 1000
+
+// every 6hrs
+const interval = 6 * 60 * 60 * 1000
+
+setInterval(tweeter, interval)
